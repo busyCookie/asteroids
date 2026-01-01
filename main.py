@@ -1,9 +1,10 @@
 import pygame
+#import player
 
 from logger import log_state
 from constants import SCREEN_WIDTH
 from constants import SCREEN_HEIGHT
-
+from player import Player
 
 def main():
     exit = False
@@ -16,6 +17,7 @@ def main():
 
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
     while exit != True:
         #pre loop
@@ -29,6 +31,7 @@ def main():
                 return
 
         screen.fill("black")
+        player.draw(screen)
         pygame.display.flip()
 
         #loop end
