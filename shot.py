@@ -1,10 +1,12 @@
 import pygame
 import circleshape
+from constants import SHOT_RADIUS
 from constants import LINE_WIDTH
 
-class Asteroid(circleshape.CircleShape):
-    def __init__(self, x, y, radius):
-        super().__init__(x, y, radius)
+#class for projectile object
+class Shot(circleshape.CircleShape):
+    def __init__(self, x, y):
+        super().__init__(x, y, SHOT_RADIUS)
 
     # drew asteroid
     def draw(self, screen):
