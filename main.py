@@ -1,6 +1,5 @@
 import sys
 import pygame
-#import player
 
 from logger import log_state
 from logger import log_event
@@ -58,7 +57,7 @@ def main():
                 if asteroid.collide_with(shot):
                     log_event("asteroid_shot")
                     shot.kill()
-                    asteroid.kill()
+                    asteroid.split()
 
         # draw
         screen.fill("black")
