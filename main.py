@@ -45,9 +45,6 @@ def main():
 
     font = pygame.freetype.Font("./NotoSansMono-VariableFont_wdth,wght.ttf", 24, 0, 0, True)
     font_symbol = pygame.freetype.Font("./NotoSansSymbols2-Regular.ttf", 24, 0, 0, True)
-    #font_symbol = pygame.freetype.SysFont("C059", 24)
-
-    #font = pygame.freetype.SysFont("segoeuisymbol", 24)
 
     while exit != True:
         #pre loop
@@ -69,20 +66,16 @@ def main():
         for asteroid in asteroids:
             if player.collide_with(asteroid):
                 asteroid.split()
-                if i_time < 0:
-                    if lives <= 0:
-                        log_event("player_killed")
-                        print(f"Gamer over!")
-                        print(f"Score: {score}")
-
-                        sys.exit()
-                    else:
-                        log_event("player_hit")
-                        player.get_hit()
-                        player.reset(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-                        i_time = 1
-                        lives = player.get_lives()
-                        lives_string = " ♥" * lives
+                log_event("player_hit")
+                try:
+                    player = player.process_hit(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+                except:
+                    log_event("player_killed")
+                    print(f"Gamer over!")
+                    print(f"Score: {score}")
+                    sys.exit()
+                else:
+                    lives_string = " ♥" * player.get_lives()
 
             for shot in shots:
                 if asteroid.collide_with(shot):

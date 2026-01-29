@@ -1,3 +1,4 @@
+import math
 import pygame
 import circleshape
 from shot import Shot
@@ -7,7 +8,9 @@ from constants import PLAYER_TURN_SPEED
 from constants import PLAYER_START_LIVES
 from constants import PLAYER_SHOOT_SPEED
 from constants import PLAYER_SHOOT_COOLDOWN_SECONDS
+from constants import PLAYER_I_TIME
 from constants import LINE_WIDTH
+
 
 #class for player object
 class Player(circleshape.CircleShape):
@@ -17,9 +20,15 @@ class Player(circleshape.CircleShape):
         self.rotation = 180
         self.shot_cooldown = 0
         self.lives = PLAYER_START_LIVES
+        self.i_time = PLAYER_I_TIME
 
     def get_lives(self):
         return self.lives
+
+    def get_istate(self):
+        if self.i_time > 0:
+            return True
+        return False
 
     # generate triange shape
     def triangle(self):
@@ -32,7 +41,11 @@ class Player(circleshape.CircleShape):
 
     # draw player shape
     def draw(self, screen):
-        pygame.draw.polygon(screen, "blue", self.triangle(), LINE_WIDTH)
+        color = "blue"
+        if self.i_time > 0 and math.fmod(math.trunc(self.i_time * 5), 2) == 0:
+            color = "red"
+
+        pygame.draw.polygon(screen, color, self.triangle(), LINE_WIDTH)
 
     # controls
     def shoot(self):
@@ -49,8 +62,19 @@ class Player(circleshape.CircleShape):
 
         self.position += speed_vector
 
-    def get_hit(self):
-        self.lives -= 1
+    def process_hit(self, x, y):
+        if self.i_time > 0:
+            return self
+        else:
+            self.lives -= 1
+            if self.lives >= 0:
+                new_player = Player( x, y)
+                new_player.lives = self.lives
+                self.kill()
+                return new_player
+            else:
+                raise PlayerState("player is dead")
+
 
     def reset(self, x, y):
         self.position = pygame.Vector2(x, y)
@@ -62,6 +86,7 @@ class Player(circleshape.CircleShape):
 
     def update(self, dt):
         self.shot_cooldown -= dt
+        self.i_time -= dt
 
         keys = pygame.key.get_pressed()
 
