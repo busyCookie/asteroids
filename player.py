@@ -13,7 +13,7 @@ class Player(circleshape.CircleShape):
     def __init__(self, x, y):
         super().__init__(x, y, PLAYER_RADIUS)
 
-        self.rotation = 0
+        self.rotation = 180
         self.shot_cooldown = 0
 
     # generate triange shape
@@ -27,7 +27,7 @@ class Player(circleshape.CircleShape):
 
     # draw player shape
     def draw(self, screen):
-        pygame.draw.polygon(screen, "white", self.triangle(), LINE_WIDTH)
+        pygame.draw.polygon(screen, "blue", self.triangle(), LINE_WIDTH)
 
     # controls
     def shoot(self):
@@ -43,6 +43,14 @@ class Player(circleshape.CircleShape):
         speed_vector = direction * PLAYER_SPEED * dt
 
         self.position += speed_vector
+
+    def reset(self, x, y):
+        self.position = pygame.Vector2(x, y)
+        self.velocity = pygame.Vector2(0, 0)
+        self.rotation = 180
+        self.shot_cooldown = 0
+
+        #print(f"x: {x}, y: {y}; pos: {self.position}")
 
     def update(self, dt):
         self.shot_cooldown -= dt
