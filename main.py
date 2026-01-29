@@ -36,6 +36,8 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    lives = player.get_lives()
+    lives_string = " ♥" * lives
 
     field = AsteroidField()
 
@@ -56,7 +58,7 @@ def main():
             if event.type == pygame.QUIT:
                 exit = True
                 print(f"Score: {score}")
-                print(f"lives: {" ♥" * lives}")
+                print(f"lives: {lives_string}")
                 print(f"game closing")
                 return
 
@@ -65,18 +67,22 @@ def main():
         i_time -= dt
 
         for asteroid in asteroids:
-            if player.collide_with(asteroid) and i_time <= 0:
-                if lives <= 0:
-                    log_event("player_hit")
-                    print(f"Gamer over!")
-                    print(f"Score: {score}")
-                    print(f"lives: {" ♥" * lives}")
+            if player.collide_with(asteroid):
+                asteroid.split()
+                if i_time < 0:
+                    if lives <= 0:
+                        log_event("player_killed")
+                        print(f"Gamer over!")
+                        print(f"Score: {score}")
 
-                    sys.exit()
-                else:
-                    lives -= 1
-                    i_time = 1
-                    player.reset(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+                        sys.exit()
+                    else:
+                        log_event("player_hit")
+                        player.get_hit()
+                        player.reset(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+                        i_time = 1
+                        lives = player.get_lives()
+                        lives_string = " ♥" * lives
 
             for shot in shots:
                 if asteroid.collide_with(shot):
@@ -88,19 +94,12 @@ def main():
         # draw
         screen.fill("black")
 
-        #score_ui = font.render(f"score: {score}", 1, "white")
-        #lives_line = "\xA5" * lives
-        #lives_ui =  font.render(lives_line, 1, "red")
-
         for item in drawable:
             item.draw(screen)
 
-        #screen.blit(score_ui, (10,10) )
-        #screen.blit(lives_ui, (10,34) )
-
         font.render_to(screen, (10,10), f"score: {score}", "yellow")
         font.render_to(screen, (10,36), f"lives:", "red")
-        font_symbol.render_to(screen, (100,36), " ♥" * lives, "red")
+        font_symbol.render_to(screen, (100,36), lives_string, "red")
 
         pygame.display.flip()
 

@@ -4,6 +4,7 @@ from shot import Shot
 from constants import PLAYER_RADIUS
 from constants import PLAYER_SPEED
 from constants import PLAYER_TURN_SPEED
+from constants import PLAYER_START_LIVES
 from constants import PLAYER_SHOOT_SPEED
 from constants import PLAYER_SHOOT_COOLDOWN_SECONDS
 from constants import LINE_WIDTH
@@ -15,6 +16,10 @@ class Player(circleshape.CircleShape):
 
         self.rotation = 180
         self.shot_cooldown = 0
+        self.lives = PLAYER_START_LIVES
+
+    def get_lives(self):
+        return self.lives
 
     # generate triange shape
     def triangle(self):
@@ -43,6 +48,9 @@ class Player(circleshape.CircleShape):
         speed_vector = direction * PLAYER_SPEED * dt
 
         self.position += speed_vector
+
+    def get_hit(self):
+        self.lives -= 1
 
     def reset(self, x, y):
         self.position = pygame.Vector2(x, y)
