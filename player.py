@@ -10,6 +10,8 @@ from constants import PLAYER_SHOOT_SPEED
 from constants import PLAYER_SHOOT_COOLDOWN_SECONDS
 from constants import PLAYER_I_TIME
 from constants import LINE_WIDTH
+from constants import SCREEN_WIDTH
+from constants import SCREEN_HEIGHT
 
 
 #class for player object
@@ -102,3 +104,12 @@ class Player(circleshape.CircleShape):
             if self.shot_cooldown <= 0:
                 self.shoot()
                 self.shot_cooldown = PLAYER_SHOOT_COOLDOWN_SECONDS
+
+        if self.position.x > SCREEN_WIDTH:
+            self.position = pygame.Vector2(self.position.x - SCREEN_WIDTH, self.position.y)
+        if self.position.x < 0:
+            self.position = pygame.Vector2(self.position.x + SCREEN_WIDTH, self.position.y)
+        if self.position.y > SCREEN_HEIGHT:
+            self.position = pygame.Vector2(self.position.x, self.position.y - SCREEN_HEIGHT)
+        if self.position.y < 0:
+            self.position = pygame.Vector2(self.position.x, self.position.y + SCREEN_HEIGHT)
