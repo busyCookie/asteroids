@@ -13,7 +13,6 @@ from asteroidfield import AsteroidField
 
 def main():
     exit = False
-    lives = 3
     score = 0
     i_time = 0
     dt = 0
@@ -36,15 +35,14 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-    lives = player.get_lives()
-    lives_string = " ♥" * lives
+    lives_string = " ♥" * player.get_lives()
 
     field = AsteroidField()
 
     pygame.freetype.init()
 
-    font = pygame.freetype.Font("./NotoSansMono-VariableFont_wdth,wght.ttf", 24, 0, 0, True)
-    font_symbol = pygame.freetype.Font("./NotoSansSymbols2-Regular.ttf", 24, 0, 0, True)
+    font = pygame.freetype.Font("./fonts/NotoSansMono-VariableFont_wdth,wght.ttf", 24, 0, 0, True)
+    font_symbol = pygame.freetype.Font("./fonts/NotoSansSymbols2-Regular.ttf", 24, 0, 0, True)
 
     while exit != True:
         #pre loop
