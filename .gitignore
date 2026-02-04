@@ -10,5 +10,6 @@ wheels/
 .venv
 
 # logger
+logs/
 game_state.jsonl
 game_events.jsonl

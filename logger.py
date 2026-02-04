@@ -1,6 +1,7 @@
 import inspect
 import json
 import math
+import pathlib
 from datetime import datetime
 
 __all__ = ["log_state", "log_event"]
@@ -108,8 +109,11 @@ def log_state():
     }
 
     # New log file on each run
+    path = pathlib.Path("./logs/game_state.jsonl")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.touch(exist_ok=True)
     mode = "w" if not _state_log_initialized else "a"
-    with open("game_state.jsonl", mode) as f:
+    with path.open(mode) as f:
         f.write(json.dumps(entry) + "\n")
 
     _state_log_initialized = True
@@ -128,8 +132,11 @@ def log_event(event_type, **details):
         **details,
     }
 
+    path = pathlib.Path("./logs/game_events.jsonl")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.touch(exist_ok=True)
     mode = "w" if not _event_log_initialized else "a"
-    with open("game_events.jsonl", mode) as f:
+    with path.open(mode) as f:
         f.write(json.dumps(event) + "\n")
 
     _event_log_initialized = True
