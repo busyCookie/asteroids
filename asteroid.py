@@ -32,7 +32,7 @@ class Asteroid(circleshape.CircleShape):
 
     # drew asteroid
     def draw(self, screen):
-        pygame.draw.circle(screen, "white", self.position, self.radius, LINE_WIDTH)
+        pygame.draw.circle(screen, "grey", self.position, self.radius, LINE_WIDTH)
 
     # random movement
     def update(self, dt):

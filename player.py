@@ -43,7 +43,7 @@ class Player(circleshape.CircleShape):
 
     # draw player shape
     def draw(self, screen):
-        color = "blue"
+        color = "cyan"
         if self.i_time > 0 and math.fmod(math.trunc(self.i_time * 5), 2) == 0:
             color = "red"
 
