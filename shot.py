@@ -1,6 +1,7 @@
 import pygame
 import circleshape
 from constants import SHOT_RADIUS
+from constants import SHOT_TTL
 from constants import LINE_WIDTH
 from constants import SCREEN_WIDTH
 from constants import SCREEN_HEIGHT
@@ -9,6 +10,7 @@ from constants import SCREEN_HEIGHT
 class Shot(circleshape.CircleShape):
     def __init__(self, x, y):
         super().__init__(x, y, SHOT_RADIUS)
+        self.ttl = SHOT_TTL
 
     # drew asteroid
     def draw(self, screen):
@@ -16,6 +18,11 @@ class Shot(circleshape.CircleShape):
 
     # random movement
     def update(self, dt):
+        if self.ttl <= 0:
+            self.kill()
+            return
+
+        self.ttl -= 1 * dt
         speed_vector = self.velocity * dt
         self.position += speed_vector
 
