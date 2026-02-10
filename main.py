@@ -6,6 +6,7 @@ from logger import log_state
 from logger import log_event
 from constants import SCREEN_WIDTH
 from constants import SCREEN_HEIGHT
+from constants import PLAYER_SURVIVAL_TIMER
 from player import Player
 from shot import Shot
 from asteroid import Asteroid
@@ -14,6 +15,8 @@ from asteroidfield import AsteroidField
 def main():
     exit = False
     score = 0
+    survival_time = 0
+    score_time_trigger = PLAYER_SURVIVAL_TIMER
     i_time = 0
     dt = 0
 
@@ -81,6 +84,12 @@ def main():
                     score += 1
                     shot.kill()
                     asteroid.split()
+
+        # time_score
+        survival_time += dt
+        if survival_time >= score_time_trigger:
+            score += 1
+            score_time_trigger += score_time_trigger
 
         # draw
         screen.fill("black")
