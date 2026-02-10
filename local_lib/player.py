@@ -1,17 +1,17 @@
 import math
 import pygame
-import circleshape
-from shot import Shot
-from constants import PLAYER_RADIUS
-from constants import PLAYER_SPEED
-from constants import PLAYER_TURN_SPEED
-from constants import PLAYER_START_LIVES
-from constants import PLAYER_SHOOT_SPEED
-from constants import PLAYER_SHOOT_COOLDOWN_SECONDS
-from constants import PLAYER_I_TIME
-from constants import LINE_WIDTH
-from constants import SCREEN_WIDTH
-from constants import SCREEN_HEIGHT
+import local_lib.circleshape as circleshape
+from local_lib.shot import Shot
+from local_lib.constants import PLAYER_RADIUS
+from local_lib.constants import PLAYER_SPEED
+from local_lib.constants import PLAYER_TURN_SPEED
+from local_lib.constants import PLAYER_START_LIVES
+from local_lib.constants import PLAYER_SHOOT_SPEED
+from local_lib.constants import PLAYER_SHOOT_COOLDOWN_SECONDS
+from local_lib.constants import PLAYER_I_TIME
+from local_lib.constants import LINE_WIDTH
+from local_lib.constants import SCREEN_WIDTH
+from local_lib.constants import SCREEN_HEIGHT
 
 
 #class for player object

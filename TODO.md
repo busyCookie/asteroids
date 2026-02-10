@@ -1,5 +1,5 @@
  - [x] score for survival time.
- - [ ] moving scripts into specific folder.
+ - [x] moving scripts into specific folder.
  - [ ] split UI into seprate script/class and make it "drawable".
  - [ ] asteroids stiff collisions.
  - [ ] movement inertia for player.

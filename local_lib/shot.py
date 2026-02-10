@@ -1,10 +1,10 @@
 import pygame
-import circleshape
-from constants import SHOT_RADIUS
-from constants import SHOT_TTL
-from constants import LINE_WIDTH
-from constants import SCREEN_WIDTH
-from constants import SCREEN_HEIGHT
+import local_lib.circleshape as circleshape
+from local_lib.constants import SHOT_RADIUS
+from local_lib.constants import SHOT_TTL
+from local_lib.constants import LINE_WIDTH
+from local_lib.constants import SCREEN_WIDTH
+from local_lib.constants import SCREEN_HEIGHT
 
 #class for projectile object
 class Shot(circleshape.CircleShape):

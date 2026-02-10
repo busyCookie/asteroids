@@ -2,15 +2,15 @@ import sys
 import pygame
 import pygame.freetype
 
-from logger import log_state
-from logger import log_event
-from constants import SCREEN_WIDTH
-from constants import SCREEN_HEIGHT
-from constants import PLAYER_SURVIVAL_TIMER
-from player import Player
-from shot import Shot
-from asteroid import Asteroid
-from asteroidfield import AsteroidField
+from local_lib.logger import log_state
+from local_lib.logger import log_event
+from local_lib.constants import SCREEN_WIDTH
+from local_lib.constants import SCREEN_HEIGHT
+from local_lib.constants import PLAYER_SURVIVAL_TIMER
+from local_lib.player import Player
+from local_lib.shot import Shot
+from local_lib.asteroid import Asteroid
+from local_lib.asteroidfield import AsteroidField
 
 def main():
     exit = False
