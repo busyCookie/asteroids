@@ -6,6 +6,7 @@ from local_lib.logger import log_state
 from local_lib.logger import log_event
 from local_lib.constants import SCREEN_WIDTH
 from local_lib.constants import SCREEN_HEIGHT
+from local_lib.constants import PLAYER_LIVE_BONUS
 from local_lib.constants import PLAYER_SURVIVAL_TIMER
 from local_lib.player import Player
 from local_lib.shot import Shot
@@ -17,6 +18,7 @@ def main():
     score = 0
     survival_time = 0
     score_time_trigger = PLAYER_SURVIVAL_TIMER
+    bonus_live_at = PLAYER_LIVE_BONUS
     i_time = 0
     dt = 0
 
@@ -64,6 +66,18 @@ def main():
         updatable.update(dt)
         i_time -= dt
 
+                # time_score
+        survival_time += dt
+        if survival_time >= score_time_trigger:
+            score += 1
+            score_time_trigger += score_time_trigger
+
+        # bonus lives
+        if bonus_live_at <= score:
+            bonus_live_at += bonus_live_at
+            player.add_life()
+            lives_string = " ♥" * player.get_lives()
+
         for asteroid in asteroids:
             if player.collide_with(asteroid):
                 asteroid.split()
@@ -84,12 +98,6 @@ def main():
                     score += 1
                     shot.kill()
                     asteroid.split()
-
-        # time_score
-        survival_time += dt
-        if survival_time >= score_time_trigger:
-            score += 1
-            score_time_trigger += score_time_trigger
 
         # draw
         screen.fill("black")

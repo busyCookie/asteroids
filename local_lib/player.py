@@ -32,6 +32,9 @@ class Player(circleshape.CircleShape):
             return True
         return False
 
+    def add_life(self):
+        self.lives += 1
+
     # generate triange shape
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
