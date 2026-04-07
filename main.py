@@ -66,7 +66,7 @@ def main():
         updatable.update(dt)
         i_time -= dt
 
-                # time_score
+        # time_score
         survival_time += dt
         if survival_time >= score_time_trigger:
             score += 1

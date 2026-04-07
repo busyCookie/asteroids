@@ -23,3 +23,8 @@ ASTEROID_MIN_RADIUS = 20
 ASTEROID_KINDS      = 3
 ASTEROID_SPAWN_RATE_SECONDS = 0.8
 ASTEROID_MAX_RADIUS = ASTEROID_MIN_RADIUS * ASTEROID_KINDS
+
+#UI
+FONT                = "./fonts/NotoSansMono-VariableFont_wdth,wght.ttf"
+SYMBOL_FONT         = "./fonts/NotoSansSymbols2-Regular.ttf"
+FONT_HEIGHT         = 24

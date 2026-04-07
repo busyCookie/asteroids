@@ -3,10 +3,26 @@ import pygame.freetype
 
 from local_lib.constants import FONT
 from local_lib.constants import SYMBOL_FONT
+from local_lib.constants import FONT_HEIGHT
+
+class ui_gauge():
+    def __init__(self, x, y, type, metric, value):
+        self.type = type
+        self.text_font = pygame.freetype.Font(FONT, FONT_HEIGHT, 0, 0, True)
+
+        if type == "symbolic":
+            self.symbol_font = pygame.freetype.Font(SYMBOL_FONT, FONT_HEIGHT, 0, 0, True)
+
+
+        self.x = x
+        self.y = y
+
+
+    def update(self, score):
+
 
 class score_gauge(pygame.freetype.Font):
-    def
-    __init__(self, x, y, score):
+    def __init__(self, x, y, score):
         super().__init__(FONT, 24, 0, 0, True)
         self.gauge_string = f"Score: {score}"
         self.x = x
